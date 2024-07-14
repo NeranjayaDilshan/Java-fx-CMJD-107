@@ -7,5 +7,5 @@ CREATE TABLE Customer(
 	name VARCHAR(30),
 	address VARCHAR(30) NOT NULL,
 	salary decimal(10,2) not null
- 
+
 );

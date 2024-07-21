@@ -52,13 +52,15 @@ public class CustomerController {
     @FXML
     private TextField txtSalary;
 
-    public void initialize() {
+    public void initialize() throws ClassNotFoundException, SQLException {
         System.out.println("Calling first");
         colID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         colName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btnDelete"));
+       
+        getAllCustomer();
     }
 
     @FXML
@@ -86,6 +88,7 @@ public class CustomerController {
         int rows = statement.executeUpdate();
         if (rows > 0) {
             System.out.println("Saved Success");
+            getAllCustomer();
             new Alert(Alert.AlertType.CONFIRMATION, "Saved Success").show();
         } else {
             System.out.println("Error while Saving Cusotmer");
@@ -93,8 +96,7 @@ public class CustomerController {
         }
     }
 
-    @FXML
-    void btnLoadAllCusotmerOnAction(ActionEvent event) throws ClassNotFoundException, SQLException {
+    public void getAllCustomer() throws ClassNotFoundException, SQLException {
         // Connection connection = DBConnection.getInstance().getConnection();
         // PreparedStatement statement = connection.prepareStatement("SELECT * from
         // customer");
@@ -134,5 +136,10 @@ public class CustomerController {
         System.out.println(" customerTmList :  " + customerTmList);
 
         tblCustomer.setItems(customerTmList);
+    }
+
+    @FXML
+    void btnLoadAllCusotmerOnAction(ActionEvent event) throws ClassNotFoundException, SQLException {
+        getAllCustomer();
     }
 }

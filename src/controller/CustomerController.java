@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import model.Customer;
 
@@ -49,8 +50,10 @@ public class CustomerController {
         int rows = statement.executeUpdate();
         if (rows > 0) {
             System.out.println("Saved Success");
+            new Alert(Alert.AlertType.CONFIRMATION,"Saved Success").show();
         } else {
             System.out.println("Error while Saving Cusotmer");
+            new Alert(Alert.AlertType.ERROR,"Error while Saving Cusotmer").show();
         }
     }
 

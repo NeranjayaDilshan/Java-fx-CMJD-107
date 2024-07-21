@@ -37,11 +37,11 @@
       </TextField>
       <TableView fx:id="tblCustomer" layoutX="318.0" layoutY="94.0" prefHeight="243.0" prefWidth="376.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="75.0" text="Address" />
-            <TableColumn prefWidth="75.0" text="Salary" />
-            <TableColumn prefWidth="75.0" text="Action" />
+          <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="75.0" text="Address" />
+            <TableColumn fx:id="colSalary" prefWidth="75.0" text="Salary" />
+            <TableColumn fx:id="colAction" prefWidth="75.0" text="Action" />
         </columns>
       </TableView>
       <Button layoutX="127.0" layoutY="349.0" mnemonicParsing="false" onAction="#btnSaveCustomerOnAction" prefHeight="41.0" prefWidth="178.0" style="-fx-background-color: green;" text="Save Customer" textFill="WHITE">

@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import db.DBConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.Customer;
+import tm.CustomerTM;
 
 public class CustomerController {
 
@@ -52,33 +56,51 @@ public class CustomerController {
         int rows = statement.executeUpdate();
         if (rows > 0) {
             System.out.println("Saved Success");
-            new Alert(Alert.AlertType.CONFIRMATION,"Saved Success").show();
+            new Alert(Alert.AlertType.CONFIRMATION, "Saved Success").show();
         } else {
             System.out.println("Error while Saving Cusotmer");
-            new Alert(Alert.AlertType.ERROR,"Error while Saving Cusotmer").show();
+            new Alert(Alert.AlertType.ERROR, "Error while Saving Cusotmer").show();
         }
     }
-
 
     @FXML
     void btnLoadAllCusotmerOnAction(ActionEvent event) throws ClassNotFoundException, SQLException {
         // Connection connection = DBConnection.getInstance().getConnection();
-        // PreparedStatement statement = connection.prepareStatement("SELECT * from customer");
+        // PreparedStatement statement = connection.prepareStatement("SELECT * from
+        // customer");
         // ResultSet executeQuery = statement.executeQuery();
-        ResultSet customerSet = DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM customer").executeQuery();
+        ResultSet customerSet = DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM customer")
+                .executeQuery();
 
         ArrayList<Customer> customersList = new ArrayList<Customer>();
 
         while (customerSet.next()) {
             Customer customer = new Customer(
-                customerSet.getInt(1),
-                customerSet.getString(2),
-                customerSet.getString(3),
-                customerSet.getDouble(4)
-            );
+                    customerSet.getInt(1),
+                    customerSet.getString(2),
+                    customerSet.getString(3),
+                    customerSet.getDouble(4));
             customersList.add(customer);
         }
         System.out.println(customersList);
 
+        //////////////////////////////////////////////////////////////
+
+        ObservableList<CustomerTM> customerTmList = FXCollections.observableArrayList();
+
+        for (Customer cust : customersList) {
+
+            Button button = new Button("Delete");
+
+            CustomerTM customerTM = new CustomerTM(
+                    cust.getCustomerID(),
+                    cust.getCustomerName(),
+                    cust.getAddress(),
+                    cust.getSalary(),
+                    button);
+
+        customerTmList.add(customerTM);
+        }
+        System.out.println(" customerTmList :  "+customerTmList);
     }
 }

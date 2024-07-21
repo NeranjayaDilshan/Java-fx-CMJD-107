@@ -13,11 +13,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import model.Customer;
 import tm.CustomerTM;
 
 public class CustomerController {
+
+    @FXML
+    private TableView<CustomerTM> tblCustomer;
+
 
     @FXML
     private TextField txtAddress;
@@ -102,5 +107,7 @@ public class CustomerController {
         customerTmList.add(customerTM);
         }
         System.out.println(" customerTmList :  "+customerTmList);
+
+        tblCustomer.setItems(customerTmList);
     }
 }
